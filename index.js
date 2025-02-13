@@ -1,75 +1,40 @@
-const userChoice = document.getElementById("userChoice");
-// const rockBtn = document.getElementById("rock");
-const paperBtn = document.getElementById("paper");
-const scissorsBtn = document.getElementById("scissors");
+const buttons = document.querySelectorAll("button");
+const playerH2 = document.getElementById("playerChoice");
+const computerH2 = document.getElementById("computerChoice");
+const winnerH2 = document.getElementById("winner");
 
-const validChoices = ["Rock", "Paper", "Scissors"];
-const randomChoices = Math.floor(Math.random() * 3);
-const computerChoice = validChoices[randomChoices];
+const validChoices = ["rock", "paper", "scissors"];
 
-// Antwort anzeigen
-document.getElementById(
-  "computerChoice"
-).innerText = `Der Computer wählt: ${computerChoice}`;
-
-function playGame(playerChoice, CPUChoice) {
-  if (
-    (playerChoice === "paper" && CPUChoice === "scissors") ||
-    (playerChoice === "rock" && CPUChoice === "paper") ||
-    (playerChoice === "scissors" && CPUChoice === "rock")
-  ) {
-    return "You lost!";
+function getWinner(playerChoice, computerChoice) {
+  if (playerChoice === computerChoice) {
+    return "It's tie!";
   } else if (
-    (playerChoice === "paper" && CPUChoice === "rock") ||
-    (playerChoice === "rock" && CPUChoice === "scissors") ||
-    (playerChoice === "scissors" && CPUChoice === "paper")
+    (playerChoice === "rock" && computerChoice === "scissors") ||
+    (playerChoice === "paper" && computerChoice === "rock") ||
+    (playerChoice === "scissors" && computerChoice === "paper")
   ) {
-    return "You won!";
+    return "You win!";
   } else {
-    return "its a tie! Let's play again!";
+    return "Computer wins";
   }
 }
 
-// const result = [gameLogic(userChoice, computerChoice)];
-// console.log(
-//   `You choose: ${userChoice}, Computer choose: ${computerChoice}. ${result}`
-// );
+// console.log(buttons);
 
-const rockBtn = document.getElementById("rock");
-rockBtn.addEventListener("click", function () {
-  //   alert("You choose: Rock, Computer choose: ${computerChoice}. ${result}");
-  alert("Button clicked!");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const playerChoice = button.textContent.toLocaleLowerCase();
+    const computerChoice =
+      validChoices[Math.floor(Math.random() * validChoices.length)];
+
+    // playerH2.textContent = playerChoice;
+    // computerH2.textContent = computerChoice;
+
+    playerH2.textContent = `You choose: ${playerChoice}`;
+    computerH2.textContent = `Computer choice: ${computerChoice}`;
+    winnerH2.textContent = `Winner is: ${getWinner(
+      playerChoice,
+      computerChoice
+    )}`;
+  });
 });
-
-// const validChoices = ["rock", "paper", "scissors"];
-// if (!validChoices.includes(userChoice)) {
-//   console.log(
-//     "Invalid choice. Please choose rock, paper or scissors to start the game"
-//   );
-// }
-
-// const randomChoice = Math.floor(Math.random() * 3);
-// const computerChoice = validChoices[randomChoice];
-
-// function gameLogic(playerChoice, CPUChoice) {
-//   if (
-//     (playerChoice === "paper" && CPUChoice === "scissors") ||
-//     (playerChoice === "rock" && CPUChoice === "paper") ||
-//     (playerChoice === "scissors" && CPUChoice === "rock")
-//   ) {
-//     return "You lost!";
-//   } else if (
-//     (playerChoice === "paper" && CPUChoice === "rock") ||
-//     (playerChoice === "rock" && CPUChoice === "scissors") ||
-//     (playerChoice === "scissors" && CPUChoice === "paper")
-//   ) {
-//     return "You won!";
-//   } else {
-//     return "its a tie! Let's play again!";
-//   }
-// }
-
-// const result = [gameLogic(userChoices, computerChoices)];
-// console.log(
-//   `You choose: ${userChoices}, Computer choose: ${computerChoices}. ${result}`
-// );
